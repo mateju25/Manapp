@@ -48,6 +48,10 @@ public class MainPageController {
         textTime.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00")));
         viewLinks.setCellFactory(param -> new ListCellLink());
         comboDay.getItems().addAll(List.of("Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota", "Nedeľa"));
+        if (svc.findAll() == null) {
+            StartController.mainStage.close();
+            return;
+        }
         linkList.setLinks(svc.findAll().getLinks());
         printLinks();
         timer.scheduleAtFixedRate(new TimerTask() {
